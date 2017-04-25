@@ -7,15 +7,15 @@ import UIKit
  */
 
 // StringからURLを生成
-var url = URL.init(string: "http://68.media.tumblr.com/9ac6be74ae9269810ad269a13fae7512/tumblr_inline_o000lfvfwO1rbh5uh_540.png")
+var url = URL(string: "http://68.media.tumblr.com/9ac6be74ae9269810ad269a13fae7512/tumblr_inline_o000lfvfwO1rbh5uh_540.png")
 
 let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
 let localPDFPath = documentsDirectory.appending("/sample.pdf")
 
 // path (String型) -> fileURL (URL型)
 // ローカルファイルのpathからfileURLを生成
-let localPDFURL = URL.init(fileURLWithPath: localPDFPath)
-let documentsDirURL = URL.init(fileURLWithPath: documentsDirectory)
+let localPDFURL = URL(fileURLWithPath: localPDFPath)
+let documentsDirURL = URL(fileURLWithPath: documentsDirectory)
 
 /**
  properties
@@ -64,3 +64,11 @@ localImageURL = localImageURL.deletingLastPathComponent()
 // URL同士の比較
 documentsDirURL != localPDFURL
 documentsDirURL == localImageURL
+
+// 日本語を含むURL
+let japaneseURLString = "https://example.com/path/日本語を含むURLです"
+let encodedURLString = japaneseURLString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+
+if let encodedURLString = encodedURLString, let encodedURL = URL(string: encodedURLString) {
+    print("URL化成功: \(encodedURL)")
+}
